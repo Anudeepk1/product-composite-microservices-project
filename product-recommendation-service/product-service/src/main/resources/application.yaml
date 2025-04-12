@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: product-service
+  data:
+    mongodb:
+      database: product_db
+#      host: mongodb
+      host: localhost
+      port: 27017
+
+
+server:
+  port: 7001
+
+logging:
+  level:
+    root: INFO
+
+---
+spring.config.activate.on-profile: docker
+
+server.port: 9091

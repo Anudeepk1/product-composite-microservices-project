@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: recommendation-service
+  data:
+    mongodb:
+      database: recommendation_db
+      host: localhost #mongodb
+      port: 27017
+
+server:
+  port: 7002
+
+logging:
+  level:
+    root: INFO
