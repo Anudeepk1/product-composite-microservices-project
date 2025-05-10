@@ -1,0 +1,76 @@
+spring:
+  application:
+    name: product-composite-service
+
+server:
+  port: 7000
+
+#app:
+#  product-service:
+#    host: localhost
+#    port: 7001
+#  recommendation-service:
+#    host: localhost
+#    port: 7002
+#  review-service:
+#    host: localhost
+#    port: 7003
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+app.eureka-server: localhost
+
+eureka:
+  client:
+    registerWithEureka: true  # Enable this service to register itself with the Eureka server
+    fetchRegistry: true       # Enable this service to fetch the registry (list of other registered services)
+    serviceUrl:
+      defaultZone: http://${app.eureka-server}:8761/eureka/  # Eureka server URL (using a placeholder for host)
+    initialInstanceInfoReplicationIntervalSeconds: 5  # Interval (in seconds) before the first heartbeat/registration
+    registryFetchIntervalSeconds: 5  # How often (in seconds) to fetch the registry from Eureka server
+
+  instance:
+    leaseRenewalIntervalInSeconds: 5  # How often (in seconds) this service sends a heartbeat to Eureka
+    leaseExpirationDurationInSeconds: 5  # Time (in seconds) after which Eureka removes the instance if no heartbeat is received
+
+
+spring.cloud.stream:
+  defaultBinder: rabbit
+  default.contentType: application/json
+  bindings:
+    products-out-0:
+      destination: products
+      producer:
+        required-groups: auditGroup
+    recommendations-out-0:
+      destination: recommendations
+      producer:
+        required-groups: auditGroup
+    reviews-out-0:
+      destination: reviews
+      producer:
+        required-groups: auditGroup
+
+#spring.cloud.stream.kafka.binder:
+#  brokers: 127.0.0.1
+#  defaultBrokerPort: 9092
+
+spring.rabbitmq:
+  host: 127.0.0.1
+  port: 5672
+  username: guest
+  password: guest
+
+logging:
+  level:
+    root: INFO
+#    org.springframework.cloud.stream: DEBUG
+#    org.springframework.amqp: DEBUG
+#    org.springframework.integration: DEBUG
+
+management.endpoint.health.show-details: "ALWAYS"
+management.endpoints.web.exposure.include: "*"
