@@ -11,22 +11,30 @@ Product Composite Service: Composite service that interacts with the above three
 
 Each service runs independently, packaged with its own Dockerfile, and orchestrated together via Docker Compose.
 
-Tech Stack
+<h3>First Release (feature/dev-1.0.0)</h3>
+ 
+  -> Basic microservices with:
+  -> RestTemplate communication
+  -> MongoDB & MySQL (Spring Data MongoDB & JPA)
+  -> Docker & Docker Compose setup
 
-Java 17
-Spring Boot
-Spring Web (RestTemplate based communication)
-Spring Data MongoDB
-Spring Data JPA (MySQL)
-Docker & Docker Compose
-MongoDB
-MySQL
+  <h4>Individual services:</h4>
+  
+  - Product Service
+  - Recommendation Service
+  - Review Service
+  - Product Composite Service (aggregates the above)
 
-Planned Future Enhancements:
+<h3>Second Release (feature/dev-2.0)</h3>
 
-Service Discovery (Eureka/Nacos)
-Distributed Logging (Sleuth + Zipkin)
-Spring Security
-Messaging Queue (RabbitMQ/Kafka)
-OpenFeign / WebClient for inter-service communication
-Resilience4j for Circuit Breaking
+  <h4>Upgraded architecture:</h4>
+  
+  -> Migrated to WebClient
+  -> Added Service Discovery (Eureka)
+  -> Introduced Spring Cloud using RabbitMQ (async communication)
+
+<h3>Planned Future Enhancements</h3>
+
+  -> Distributed Logging (Spring Cloud Sleuth + Zipkin)
+  -> Spring Security
+  -> RabbitMQ with two partitions and two instances
